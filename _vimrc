@@ -13,7 +13,6 @@ if has("autocmd")
   " ...
 endif
 
-
 " command-line completion
 set wildmenu
 
@@ -57,6 +56,54 @@ set autoindent
 
 " (really) nice color scheme
 colorscheme desert "torte
+
+" fold away comment block
+map zp :call FoldCommentBlock()<CR>
+
+" TODO
+" need to make sure it still works at BOF and EOF
+" also doesn't work correctly when you aren't inside comments
+function! FoldCommentBlock()
+	let numlines = line('$') " total number of lines in the file
+	let startLine = line('.')  " get current line number
+
+	" Move to first commented line
+	while startLine >= 1
+		if getline(startLine) =~? '^\/\/.*' " if line starts with //
+			let startLine -= 1
+			" move up one line
+			normal k
+		else
+			break
+		endif
+	endwhile
+
+	"for some reason we are one line too far
+	normal j
+
+	" highlight current line
+	execute 'normal! V'
+
+
+	let end = startLine + 1
+
+	" Move to last commented line
+	while end <= numlines
+		if getline(end) =~? '^\/\/.*' " if line starts with //
+			let end += 1
+			" move down one line
+			normal j
+		else
+			break
+		endif
+	endwhile
+
+	"for some reason we are one line too far
+	normal k
+
+	"fold current selection
+	normal zf
+endfunction
 
 set diffexpr=MyDiff()
 function MyDiff()
