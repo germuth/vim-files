@@ -10,8 +10,11 @@ if has("autocmd")
   " 'cindent' is on in C files, etc.
   " Also load indent files, to automatically do language-dependent indenting.
   filetype plugin indent on
-  " ...
+
+	" add delphi-specific indent settings (tab character, size 8)
+	autocmd FileType delphi setlocal tabstop=8 softtabstop=0 noexpandtab shiftwidth=8
 endif
+
 
 " command-line completion
 set wildmenu
