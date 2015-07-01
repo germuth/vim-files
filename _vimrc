@@ -69,7 +69,7 @@ function! FoldCommentBlock()
 
 	" Move to first commented line
 	while startLine >= 1
-		if getline(startLine) =~? '^\/\/.*' " if line starts with //
+		if getline(startLine) =~? '^\s*\/\/.*' " if line starts with //
 			let startLine -= 1
 			" move up one line
 			normal k
@@ -89,7 +89,7 @@ function! FoldCommentBlock()
 
 	" Move to last commented line
 	while end <= numlines
-		if getline(end) =~? '^\/\/.*' " if line starts with //
+		if getline(end) =~? '^\s*\/\/.*'  " if line starts with //
 			let end += 1
 			" move down one line
 			normal j
