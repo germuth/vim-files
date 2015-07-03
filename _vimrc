@@ -24,10 +24,14 @@ set wildmenu
 map Y y$
 
 " Allow Ctrl-/ to comment/uncomment a line (No success yet)
+" It seems some special characters cannot be mapped to commands
+" It is 2015 and I can't map my text editor to forward slash.....
+" http://stackoverflow.com/questions/14122573/how-to-map-ctrl-combination-in-vim
+" map Ctrl-p Ia<Esc>
 " map <C-B> Ia<Esc> 
 
 " automatically scroll if cursor gets too close to bottom or top of file
-set scrolloff=8
+set scrolloff=7
 
 " can use ctrl-c to get out of insert mode
 map <C-c> <Esc>
@@ -50,9 +54,7 @@ set timeoutlen=250
 
 " relative line numberings
 set rnu
-
-" tab size 2
-set tabstop=2
+set number "current line should have absolute line number
 
 " autoindent after newline
 set autoindent
